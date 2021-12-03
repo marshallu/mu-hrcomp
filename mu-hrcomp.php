@@ -98,7 +98,6 @@ function mu_hrcomp_deactivate() {
 }
 register_deactivation_hook( __FILE__, 'mu_hrcomp_deactivate' );
 
-
 /**
  * Change placeholder text on Create/Edit Profile page to 'Enter Position Title Here'
  *
@@ -190,17 +189,6 @@ function mu_hrcomp_remove_view_action( $actions ) {
 add_filter( 'post_row_actions', 'mu_hrcomp_remove_view_action', 10, 1 );
 
 /**
- * Redirect all requests to the individual positions to the homepage.
- */
-function mu_hrcomp_redirect_post_types() {
-	if ( 'mu-position' === get_post_type() ) {
-		wp_safe_redirect( get_site_url() );
-		die();
-	}
-}
-add_action( 'template_redirect', 'mu_hrcomp_redirect_post_types' );
-
-/**
  * Add 'alpha' to the acceptable URL parameters
  *
  * @param array $vars The array of acceptable URL parameters.
@@ -211,5 +199,25 @@ function mu_hrcomp_url_parameters( $vars ) {
 	return $vars;
 }
 add_filter( 'query_vars', 'mu_hrcomp_url_parameters' );
+
+/**
+ * Redirect the Position custom post type to the PDF
+ *
+ */
+function mu_hrcomp_redirect_position_to_pdf() {
+	if ( 'mu-position' === get_post_type() ) {
+		if ( get_field( 'position_upload_pdf', get_queried_object_id() ) ) {
+			wp_redirect( get_field( 'position_upload_pdf' )['url'], get_queried_object_id() );
+			die();
+		} elseif ( get_field( 'position_url_pdf', get_queried_object_id() ) ) {
+			wp_redirect( get_field( 'position_url_pdf', get_queried_object_id() ) );
+			die();
+		} else {
+			wp_redirect( get_site_url() );
+			die();
+		}
+	}
+}
+add_action( 'template_redirect', 'mu_hrcomp_redirect_position_to_pdf' );
 
 add_action( 'init', 'mu_hrcomp_post_type' );
