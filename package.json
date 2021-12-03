@@ -1,0 +1,30 @@
+{
+  "name": "mu-hrcomp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marshallu/mu-hrcomp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marshallu/mu-hrcomp/issues"
+  },
+  "homepage": "https://github.com/marshallu/mu-hrcomp#readme",
+  "devDependencies": {
+    "@marshallu/marsha-tailwind": "^1.0.3",
+    "laravel-mix": "^6.0.39"
+  }
+}
