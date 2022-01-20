@@ -1,4 +1,7 @@
 {
+	"name": "marshallu/mu-hrcomp",
+	"description": "Plugin that with a custom post type for jobs and salary information for HR.",
+	"type": "wordpress-plugin",
     "require": {
         "paulthewalton/acf-stubs": "^5.8",
         "paulthewalton/acf-pro-stubs": "5.8.9.1",
