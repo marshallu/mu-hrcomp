@@ -65,7 +65,7 @@ function mu_hrcomp_post_type() {
 		'capability_type'    => 'post',
 		'has_archive'        => true,
 		'hierarchical'       => false,
-		'menu_position'      => 58,
+		'menu_position'      => 52,
 		'supports'           => array( 'title', 'custom-fields', 'page-attributes', 'revisions' ),
 		'menu_icon'          => 'dashicons-money-alt',
 	);
