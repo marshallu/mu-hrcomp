@@ -77,7 +77,7 @@ function mu_hrcomp_post_type() {
  * Proper way to enqueue scripts and styles
  */
 function mu_hrcomp_scripts() {
-	wp_enqueue_style( 'mu-hrcomp', plugin_dir_url( __FILE__ ) . 'css/mu-hrcomp.css', '', true );
+	wp_enqueue_style( 'mu-hrcomp', plugin_dir_url( __FILE__ ) . 'css/mu-hrcomp.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/mu-hrcomp.css' ), 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'mu_hrcomp_scripts' );
 
