@@ -58,45 +58,26 @@ function mu_hrcomp_shortcode() {
 
 	$alpha_query = new WP_Query( $args );
 
-	$html  = '<table class="table w-full table-striped table-bordered table-services">';
-	$html .= '<thead>';
-	$html .= '<tr>';
-	$html .= '<th>Current Title</th>';
-	$html .= '<th class="w-1/6 text-center">New Pay Grade</th>';
-	$html .= '<th class="w-1/6 text-center">Salary Range Min</th>';
-	$html .= '<th class="w-1/6 text-center">Salary Range Mid</th>';
-	$html .= '<th class="w-1/6 text-center">Salary Range Max</th>';
-	$html .= '</tr>';
-	$html .= '</thead>';
-	$html .= '<tbody>';
+	$html = '<ul>';
 
 	if ( $alpha_query->have_posts() ) {
 		while ( $alpha_query->have_posts() ) {
 			$alpha_query->the_post();
-			$html .= '<tr>';
-
+			$html .= '<li>';
 			if ( get_field( 'position_upload_pdf', get_the_id() ) ) {
-				$html .= '<td><a href="' . esc_url( get_field( 'position_upload_pdf' )['url'], get_the_id() ) . '">' . get_the_title() . '</a></td>';
+				$html .= '<a href="' . esc_url( get_field( 'position_upload_pdf' )['url'], get_the_id() ) . '">' . get_the_title() . '</a>';
 			} elseif ( get_field( 'position_url_pdf', get_the_id() ) ) {
-				$html .= '<td><a href="' . esc_url( get_field( 'position_url_pdf' ), get_the_id() ) . '">' . get_the_title() . '</a></td>';
+				$html .= '<a href="' . esc_url( get_field( 'position_url_pdf' ), get_the_id() ) . '">' . get_the_title() . '</a>';
 			} else {
-				$html .= '<td>' . get_the_title() . '</td>';
+				$html .= get_the_title();
 			}
-
-			$html .= '<td>' . get_field( 'position_new_pay_grade', get_the_id() ) . '</td>';
-			$html .= '<td>' . get_field( 'position_salary_min', get_the_id() ) . '</td>';
-			$html .= '<td>' . get_field( 'position_salary_mid', get_the_id() ) . '</td>';
-			$html .= '<td>' . get_field( 'position_salary_max', get_the_id() ) . '</td>';
-			$html .= '';
+			$html .= '</li>';
 		}
 	} else {
-		$html .= '<tr>';
-		$html .= '<td colspan="5">No positions start with the letter ' . esc_attr( $alpha_letter ) . '.</td>';
-		$html .= '</tr>';
+		$html .= '<li>No positions start with the letter ' . esc_attr( $alpha_letter ) . '.</li>';
 	}
 
-	$html .= '</tbody>';
-	$html .= '</table>';
+	$html .= '</ul>';
 
 	wp_reset_postdata();
 
